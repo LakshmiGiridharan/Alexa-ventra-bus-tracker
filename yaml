@@ -1,0 +1,17 @@
+
+---
+
+## 🏗️ Local Setup (for Alexa Integration)
+
+### Prerequisites
+
+- Ngrok installed (`brew install ngrok` or [ngrok.com](https://ngrok.com))
+- Alexa Developer Account
+- Flask & Python installed
+
+### Steps
+
+1. Clone this repo and run:
+
+   ```bash
+   pip install -r requirements.txt
