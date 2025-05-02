@@ -1,0 +1,106 @@
+## 🛠️ Setup & Deployment Guide
+
+Follow these steps to run the Alexa-integrated Bus Tracker locally and connect it with the Alexa Developer Console for testing:
+
+---
+
+### 1. ✅ Prerequisites
+
+Before you begin, ensure the following tools are installed:
+
+- **Python 3.7+**
+- **Flask**
+- **Ngrok** – for exposing your local Flask server to the internet
+- **Alexa Developer Account** – [developer.amazon.com](https://developer.amazon.com)
+- **CTA Bus Tracker API Key** – [https://www.transitchicago.com/developers/bustracker/](https://www.transitchicago.com/developers/bustracker/)
+- **Visual Studio Code** (or any IDE)
+
+---
+
+### 2. 🔁 Clone the Repository
+
+```bash
+git clone https://github.com/yourusername/alexa-bus-tracker.git
+cd alexa-bus-tracker
+3. 📦 Install Dependencies
+Install the required Python packages:
+
+bash
+Copy
+Edit
+pip install -r requirements.txt
+4. 🔐 Add Your CTA API Key
+Create a .env file in the root directory:
+
+bash
+Copy
+Edit
+touch .env
+Add the following line inside .env:
+
+env
+Copy
+Edit
+CTA_API_KEY=your_cta_api_key_here
+5. 🚀 Start the Flask Server
+bash
+Copy
+Edit
+python app.py
+The server will run on:
+http://localhost:5001
+
+6. 🌐 Expose the Server Using Ngrok
+Open a new terminal window and run:
+
+bash
+Copy
+Edit
+ngrok http 5001
+Copy the generated https forwarding URL (e.g., https://abc123.ngrok.io) – this will be used as your Alexa endpoint.
+
+7. ⚙️ Configure Alexa Developer Console
+Go to Alexa Developer Console
+
+Create a new skill (or open your existing one)
+
+Under Endpoint, select:
+
+HTTPS
+
+Skill endpoint: paste the Ngrok URL + /alexa
+Example: https://abc123.ngrok.io/alexa
+
+Enable Account Linking (if required) and Skill ID verification
+
+8. 🧪 Test the Skill
+Use the Alexa Simulator in the developer console, or test with a real device linked to your account.
+
+Try commands like:
+
+“Alexa, open Bus Tracker”
+
+“Alexa, set my location to 41.88 North and 87.63 West”
+
+“Alexa, how far is bus 22 going north?”
+
+9. 🧼 Stopping the Server
+Stop Flask: CTRL+C
+
+Stop Ngrok: CTRL+C
+
+You’ll need to restart Ngrok each time (since the URL changes unless you have a paid account with reserved domains).
+
+🔁 Optional: Persistent Hosting
+To make this skill production-ready, consider deploying it to:
+
+AWS Lambda via AWS API Gateway
+
+EC2 or Elastic Beanstalk
+
+Render, Heroku, or Railway (if Flask-compatible)
+
+📘 Notes
+Your Alexa skill must be in Development mode unless you submit it for public certification.
+
+Alexa verifies the Skill ID – ensure it matches what’s in SkillAdapter() in your code.
